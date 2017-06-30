@@ -3,8 +3,9 @@
 *.lo
 *.o
 *.obj
-src/x64/*.*
-src/pch/*.*
+*.opendb
+/**/x64/**/*
+/**/ipch/**/*
 *.user
 *.db
 # Precompiled Headers
