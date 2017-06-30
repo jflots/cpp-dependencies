@@ -32,33 +32,39 @@
 
 // Forward reference:
 struct Component;
+class ComponentLakos;
 
-struct File {
-    File(const filesystem::path& path)
-    : path(path)
-    , component(NULL)
-    , loc(0)
-    , includeCount(0)
-    , hasExternalInclude(false)
-    , hasInclude(false)
-    {
-    }
+struct File
+{
+	File(const filesystem::path& path)
+		: path(path)
+		, component(NULL)
+		, loc(0)
+		, includeCount(0)
+		, hasExternalInclude(false)
+		, hasInclude(false)
+		, lakosComponent(NULL)
+	{
+	}
 
-    void AddIncludeStmt(bool withPointyBrackets, const std::string& filename) {
-        rawIncludes.insert(std::make_pair(filename, withPointyBrackets));
-    }
-    filesystem::path path;
-    std::map<std::string, bool> rawIncludes;
-    std::unordered_set<File *> dependencies;
-    std::unordered_set<std::string> includePaths;
-    Component *component;
-    size_t loc;
-    size_t includeCount;
-    bool hasExternalInclude;
-    bool hasInclude;
+	void AddIncludeStmt(bool withPointyBrackets, const std::string& filename)
+	{
+		rawIncludes.insert(std::make_pair(filename, withPointyBrackets));
+	}
+	filesystem::path				path;
+	std::map<std::string, bool>		rawIncludes;
+	std::unordered_set<File*>		dependencies;
+	std::unordered_set<std::string> includePaths;
+	Component*						component;
+	ComponentLakos*					lakosComponent;
+	size_t							loc;
+	size_t							includeCount;
+	bool							hasExternalInclude;
+	bool							hasInclude;
 };
 
-struct Component {
+struct  Component 
+{
     std::string NiceName(char sub) const;
 
     std::string QuotedName() const;
@@ -89,6 +95,7 @@ struct Component {
     size_t index, lowlink;
     bool onStack;
 };
+
 
 std::vector<std::string> SortedNiceNames(const std::unordered_set<Component *> &comps);
 

@@ -19,21 +19,55 @@
 
 #include "FilesystemInclude.h"
 #include <unordered_set>
+#include <unordered_map>
 #include <vector>
 
 struct Component;
+struct File;
+class ComponentLakos;
+
+//// LAKOS....
+
+void OutputCircularDependencies(std::unordered_map<std::string, ComponentLakos*>& components,
+	const filesystem::path& outfile);
+
+
+void OutputFlatDependencies(std::unordered_map<std::string, ComponentLakos *> &components,
+	const filesystem::path &outfile);
+
+void PrintGraphOnTarget(const filesystem::path& outfile, ComponentLakos* c);
+
+void FindAndPrintCycleFrom(ComponentLakos* origin, ComponentLakos* c, std::unordered_set<ComponentLakos*> alreadyHad, std::vector<ComponentLakos*> order);
+
+void PrintCyclesForTarget(ComponentLakos* c);
+
+void PrintLinksForTarget(ComponentLakos *c);
+void PrintInfoOnTarget(ComponentLakos *c);
+void FindSpecificLink(std::unordered_map<std::string, File>& files, ComponentLakos *from, ComponentLakos *to);
+
+void PrintAllComponents(std::unordered_map<std::string, ComponentLakos*>& components, const char* description, bool (*predicate)(const ComponentLakos&));
+
+/////
 
 void OutputFlatDependencies(std::unordered_map<std::string, Component *> &components,
                             const filesystem::path &outfile);
+
+
 void OutputCircularDependencies(std::unordered_map<std::string, Component *> &components,
-                                const filesystem::path &outfile);
-void PrintGraphOnTarget(const filesystem::path &outfile, Component *c);
-void PrintAllComponents(std::unordered_map<std::string, Component *> &components,
-                        const char* description,
-                        bool (*)(const Component&));
+	const filesystem::path &outfile);
+
+
+
+
+void PrintGraphOnTarget(const filesystem::path& outfile, Component* c);
+
+void PrintAllComponents(std::unordered_map<std::string, Component*>& components, const char* description, bool (*predicate)(const Component&));
+
 void PrintAllFiles(std::unordered_map<std::string, File>& files, const char* description, bool (*predicate)(const File&));
+
 void FindAndPrintCycleFrom(Component *origin, Component *c, std::unordered_set<Component *> alreadyHad,
                            std::vector<Component *> order);
+
 void PrintCyclesForTarget(Component *c);
 void PrintLinksForTarget(Component *c);
 void PrintInfoOnTarget(Component *c);

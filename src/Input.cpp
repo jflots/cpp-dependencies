@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 #include "stdafx.h"
-
 #include "Component.h"
 #include "Configuration.h"
 #include "FstreamInclude.h"
@@ -27,7 +25,7 @@
 #include <sys/mman.h>
 #include <unistd.h>
 #endif
-
+#define NO_MEMRCHR
 #ifdef NO_MEMRCHR
 const void* memrchr(const void* buffer, unsigned char value, size_t buffersize) {
   const unsigned char* buf = (const unsigned char*)buffer;
@@ -233,9 +231,34 @@ bool IsCompileableFile(const std::string& ext) {
     return exts.count(ext) > 0;
 }
 
+bool IsHeader(const std::string& ext)
+{
+	static const std::unordered_set<std::string> exts = { ".h" };
+	return exts.count(ext) > 0;
+}
+
+bool IsSource(const std::string& ext)
+{
+	static const std::unordered_set<std::string> exts = { ".cpp" };
+	return exts.count(ext) > 0;
+}
+
 static bool IsCode(const std::string &ext) {
     static const std::unordered_set<std::string> exts = { ".c", ".C", ".cc", ".cpp", ".m", ".mm", ".h", ".H", ".hpp" };
     return exts.count(ext) > 0;
+}
+
+
+void LoadMultipleFileList(std::unordered_map<std::string, Component *> &components,
+	std::unordered_map<std::string, File>& files,
+	const std::vector<filesystem::path>& sourceDirList,
+	bool inferredComponents,
+	bool withLoc)
+{
+	for (auto& sourceDir : sourceDirList)
+	{
+		LoadFileList(components, files, sourceDir, inferredComponents, withLoc);
+	}
 }
 
 void LoadFileList(std::unordered_map<std::string, Component *> &components,

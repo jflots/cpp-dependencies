@@ -27,6 +27,8 @@ struct File;
 struct Component;
 
 bool IsCompileableFile(const std::string& ext);
+bool IsHeader(const std::string& ext);
+bool IsSource(const std::string& ext);
 
 void ForgetEmptyComponents(std::unordered_map<std::string, Component *> &components);
 void LoadFileList(std::unordered_map<std::string, Component *> &components,
@@ -34,6 +36,12 @@ void LoadFileList(std::unordered_map<std::string, Component *> &components,
                   const filesystem::path& sourceDir,
                   bool inferredComponents,
                   bool withLoc);
+
+void LoadMultipleFileList(std::unordered_map<std::string, Component *> &components,
+	std::unordered_map<std::string, File>& files,
+	const std::vector<filesystem::path>& sourceDirList,
+	bool inferredComponents,
+	bool withLoc);
 
 #endif
 

@@ -18,8 +18,17 @@
 #define __DEP_CHECKER__ANALYSIS_H
 
 #include "Component.h"
+#include "ComponentLakos.h"
 
+// LAKOS ....
 void FindCircularDependencies(std::unordered_map<std::string, Component *>& components);
+
+void KillComponent(std::unordered_map<std::string, ComponentLakos*>& components, const std::string& str);
+
+void PropagateExternalIncludesLakos(std::unordered_map<std::string, File>& files);
+
+//////
+void FindCircularDependencies(std::unordered_map<std::string, ComponentLakos *>& components);
 
 void MapFilesToComponents(std::unordered_map<std::string, Component *> &components, std::unordered_map<std::string, File>& files);
 

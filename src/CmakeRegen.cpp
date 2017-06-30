@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 #include "stdafx.h"
-
 #include "CmakeRegen.h"
 #include "Component.h"
 #include "Configuration.h"
