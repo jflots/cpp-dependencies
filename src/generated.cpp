@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#include "stdafx.h"
+
 #include "Component.h"
 
 void CreateIncludeLookupTable(std::unordered_map<std::string, File>& files,

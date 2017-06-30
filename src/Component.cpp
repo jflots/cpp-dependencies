@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#include "stdafx.h"
+
 #include "Component.h"
 
 std::string Component::NiceName(char sub) const {

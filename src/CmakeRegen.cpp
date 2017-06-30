@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#include "stdafx.h"
+
 #include "CmakeRegen.h"
 #include "Component.h"
 #include "Configuration.h"

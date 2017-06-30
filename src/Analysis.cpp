@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#include "stdafx.h"
+
 #include "Analysis.h"
 
 static void StrongConnect(std::vector<Component*> &stack, size_t& index, Component* c) {
