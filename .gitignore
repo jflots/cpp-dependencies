@@ -3,7 +3,10 @@
 *.lo
 *.o
 *.obj
-
+x64/*.*
+pch/*.*
+*.user
+*.db
 # Precompiled Headers
 *.gch
 *.pch
