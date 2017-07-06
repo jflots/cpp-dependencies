@@ -2,6 +2,8 @@
 
 #include "ComponentLakos.h"
 
+#include <boost/graph/graphviz.hpp>
+
 std::string ComponentLakos::QuotedName() const
 {
 	return std::string("\"") + NiceName('.') + std::string("\"");
